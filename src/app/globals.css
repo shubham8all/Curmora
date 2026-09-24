@@ -1,0 +1,357 @@
+@import "tailwindcss";
+
+/* Design tokens: source of truth is /design.md (Brushstroke Market). Keep these in sync with it. */
+:root {
+  --bg: #faf6f0;
+  --surface: #f5ece0;
+  --surface-alt: #eaeacf;
+  --border: #c0c0a9;
+  --text: #201b12;
+  --text-muted: #70614a;
+  --primary: #6a664a;
+  --accent: #8f4f48;
+  --highlight: #efe7ab;
+  --ink: #201b12;
+  --on-primary: #faf6f0;
+  --on-surface: #201b12;
+  --on-accent: #faf6f0;
+  --on-highlight: #201b12;
+  --on-ink: #f5ece0;
+  /* Focus ring colour; coloured blocks override it so the ring stays visible */
+  --focus-ring: var(--accent);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-alt: var(--surface-alt);
+  --color-border: var(--border);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-primary: var(--primary);
+  --color-accent: var(--accent);
+  --color-highlight: var(--highlight);
+  --color-ink: var(--ink);
+  --color-on-primary: var(--on-primary);
+  --color-on-surface: var(--on-surface);
+  --color-on-accent: var(--on-accent);
+  --color-on-highlight: var(--on-highlight);
+  --color-on-ink: var(--on-ink);
+
+  --font-display: var(--font-young-serif), "Young Serif", "Georgia", serif;
+  --font-sans: var(--font-outfit), "Outfit", system-ui, sans-serif;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+
+  /* Warm, soft shadows in ink. Products cast a drop shadow onto the block beneath them. */
+  --shadow-soft: 0 16px 32px -16px rgb(32 27 18 / 0.35);
+  --shadow-lift: 0 24px 40px -20px rgb(32 27 18 / 0.45);
+  --inset-shadow-well: inset 0 1px 3px rgb(32 27 18 / 0.14);
+}
+
+@theme static {
+  /* Motion: a soft ease-out for entrances and a springy overshoot for playful feedback */
+  --ease-soft: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --animate-rise: rise 0.9s var(--ease-soft) both;
+  --animate-pop-in: pop-in 1s var(--ease-spring) both;
+  --animate-float: float 6s ease-in-out infinite alternate;
+  --animate-pop: pop 0.45s var(--ease-spring);
+  --animate-wiggle: wiggle 0.6s ease-in-out;
+  --animate-drop-in: drop-in 0.55s var(--ease-spring) both;
+  --animate-page-in: page-in 0.5s var(--ease-soft) backwards;
+  --animate-sheet-in: sheet-in 0.35s var(--ease-soft) both;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(28px);
+    }
+  }
+  @keyframes pop-in {
+    from {
+      opacity: 0;
+      transform: translateY(40px) scale(0.6) rotate(-14deg);
+    }
+  }
+  @keyframes float {
+    from {
+      transform: translateY(-6px) rotate(-1.5deg);
+    }
+    to {
+      transform: translateY(8px) rotate(1.5deg);
+    }
+  }
+  @keyframes pop {
+    0% {
+      transform: scale(0.4);
+    }
+    60% {
+      transform: scale(1.3);
+    }
+  }
+  @keyframes wiggle {
+    0%,
+    100% {
+      transform: rotate(0);
+    }
+    20% {
+      transform: rotate(-14deg) scale(1.08);
+    }
+    45% {
+      transform: rotate(10deg);
+    }
+    70% {
+      transform: rotate(-5deg);
+    }
+  }
+  @keyframes drop-in {
+    from {
+      opacity: 0;
+      transform: translateY(-28px) scale(0.5) rotate(-24deg);
+    }
+  }
+  @keyframes page-in {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+  }
+  @keyframes sheet-in {
+    from {
+      opacity: 0;
+      transform: translateY(-12px);
+    }
+  }
+}
+
+/*
+ * Brand palette: see design.md › Brand Palette.
+ * `static` keeps every step emitted as a CSS variable so SVG illustrations and inline swatches can use var(--color-*).
+ */
+@theme static {
+  --color-pink-50: #f8f2f2;
+  --color-pink-100: #f1e2e1;
+  --color-pink-200: #e5c8c6;
+  --color-pink-300: #d9a7a4;
+  --color-pink-400: #ce827b;
+  --color-pink-500: #b6655d;
+  --color-pink-600: #8f4f48;
+  --color-pink-700: #6e3b36;
+  --color-pink-800: #4e2824;
+  --color-pink-900: #2d1512;
+  --color-pink-950: #1e0c0a;
+
+  --color-beige-50: #faf6f0;
+  --color-beige-100: #f5ece0;
+  --color-beige-200: #e6cba0;
+  --color-beige-300: #c9b088;
+  --color-beige-400: #ab9673;
+  --color-beige-500: #8b7a5d;
+  --color-beige-600: #70614a;
+  --color-beige-700: #534735;
+  --color-beige-800: #3a3124;
+  --color-beige-900: #201b12;
+  --color-beige-950: #14100a;
+
+  --color-forest-50: #f7f2cd;
+  --color-forest-100: #efe7ab;
+  --color-forest-200: #d5cd98;
+  --color-forest-300: #b8b283;
+  --color-forest-400: #9f9a71;
+  --color-forest-500: #87825f;
+  --color-forest-600: #6a664a;
+  --color-forest-700: #4f4c36;
+  --color-forest-800: #373525;
+  --color-forest-900: #1f1e13;
+  --color-forest-950: #12110a;
+
+  --color-sage-50: #f5f5d9;
+  --color-sage-100: #eaeacf;
+  --color-sage-200: #d6d6bd;
+  --color-sage-300: #c0c0a9;
+  --color-sage-400: #abab97;
+  --color-sage-500: #8c8c7c;
+  --color-sage-600: #6e6e60;
+  --color-sage-700: #535349;
+  --color-sage-800: #373730;
+  --color-sage-900: #20201b;
+  --color-sage-950: #141410;
+
+  --color-burgundy-50: #f7f2f5;
+  --color-burgundy-100: #efe6ea;
+  --color-burgundy-200: #e0ccd7;
+  --color-burgundy-300: #d0b0c1;
+  --color-burgundy-400: #c397af;
+  --color-burgundy-500: #b67d9d;
+  --color-burgundy-600: #9f6988;
+  --color-burgundy-700: #83556f;
+  --color-burgundy-800: #6a455a;
+  --color-burgundy-900: #523445;
+  --color-burgundy-950: #2f1c27;
+}
+
+/* Typography tokens from design.md */
+@utility text-display {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 6vw + 1rem, 6rem);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+@utility text-h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3vw + 1rem, 3.25rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+@utility text-h3 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+@utility text-body-md {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+@utility text-label {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+::selection {
+  background: var(--highlight);
+  color: var(--on-highlight);
+}
+
+/*
+ * Brush-painted blocks (design.md "brush" edge). The paint layer sits behind a BrushPanel and
+ * spills past it into the transparent margin of the mask. Edge masks are pre-rendered from the
+ * brush filter (scripts/render-brush-masks.mjs) and applied as 9-slice mask borders, so the
+ * brushed edge keeps the same scale on any panel size and costs nothing to scroll.
+ */
+.brush-paint {
+  --brush-edge: url("/brush/edge-0.png");
+  --brush-slice: 150px;
+  position: absolute;
+  inset: -60px;
+  z-index: -1;
+  pointer-events: none;
+  background-image: url("/brush/streaks.png");
+  background-size: 1024px 512px;
+  -webkit-mask-box-image: var(--brush-edge) 150 fill / var(--brush-slice) stretch;
+  mask-border: var(--brush-edge) 150 fill / var(--brush-slice) stretch;
+}
+
+/* Smaller cards get a finer edge. */
+.brush-paint.brush-sm {
+  --brush-slice: 96px;
+  inset: -38px;
+}
+
+.brush-1 {
+  --brush-edge: url("/brush/edge-1.png");
+}
+.brush-2 {
+  --brush-edge: url("/brush/edge-2.png");
+}
+.brush-3 {
+  --brush-edge: url("/brush/edge-3.png");
+}
+
+/* Pages with a phone bottom bar (product, build-a-box, bag) keep the footer clear of it. */
+@media (width < 64rem) {
+  body:has(.bottom-bar) footer {
+    padding-bottom: 6rem;
+  }
+}
+
+/* Headline words rise out of a mask one after another. */
+.word {
+  display: inline-block;
+  overflow: hidden;
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+  vertical-align: top;
+}
+
+.word > span {
+  display: inline-block;
+  animation: word-up 1s var(--ease-soft) both;
+  animation-delay: calc(var(--i, 0) * 90ms + 120ms);
+}
+
+@keyframes word-up {
+  from {
+    transform: translateY(110%) rotate(6deg);
+  }
+}
+
+/*
+ * Scroll reveals, driven by the scroll position itself (no JavaScript, runs off the main thread).
+ * Browsers without scroll-driven animations simply show the content.
+ */
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(56px) scale(0.96);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: reveal-up var(--ease-soft) both;
+      animation-timeline: view();
+      animation-range: entry calc(var(--reveal-delay, 0) * 60%) entry calc(70% + var(--reveal-delay, 0) * 60%);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
