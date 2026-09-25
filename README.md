@@ -1,6 +1,6 @@
 # Curmora
 
-Storefront for a small-batch dessert brand: cookies, layer cups, entremet cakes, macarons and gift boxes. Built with Next.js (App Router), TypeScript and Tailwind CSS v4, styled to the Brushstroke Market system in [design.md](design.md).
+Storefront for a small-batch dessert brand: cookies, layer cups, entremet cakes, macarons and gift boxes. Built with Next.js (App Router), TypeScript and Tailwind CSS v4, styled to the Rose Atelier system in [design.md](design.md), set in Montserrat.
 
 ## Run it
 

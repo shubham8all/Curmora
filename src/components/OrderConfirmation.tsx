@@ -42,7 +42,7 @@ export function OrderConfirmation() {
         </Link>
       </div>
 
-      <div className="rounded-md border border-border bg-surface p-6 text-on-surface shadow-soft">
+      <div className=" border border-border bg-surface p-6 text-ink">
         <p className="text-label">Order {order.id}</p>
         <ul className="mt-4 divide-y divide-border">
           {order.lines.map((l, i) => (
@@ -67,7 +67,7 @@ export function OrderConfirmation() {
           </div>
           <div className="flex justify-between pt-2">
             <dt className="text-label self-center">To pay on {order.fulfilment}</dt>
-            <dd className="font-display text-2xl tabular-nums">{formatPrice(order.total)}</dd>
+            <dd className="text-2xl font-light tabular-nums">{formatPrice(order.total)}</dd>
           </div>
         </dl>
       </div>

@@ -37,47 +37,46 @@ function Menu() {
     <div className="lg:hidden">
       <button
         type="button"
-        className={`grid size-11 place-items-center rounded-full text-text transition-colors hover:bg-surface ${focusClass}`}
+        className={`-ml-2 grid size-11 place-items-center text-ink ${focusClass}`}
         aria-expanded={open}
         aria-controls="mobile-nav"
         onClick={() => setOpen((v) => !v)}
       >
         <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
-        <Icon aria-hidden className={`size-6 transition-transform duration-300 ${open ? "rotate-90" : ""}`} weight="bold" />
+        <Icon aria-hidden className={`size-6 transition-transform duration-300 ${open ? "rotate-90" : ""}`} />
       </button>
       {open && (
         <nav
           id="mobile-nav"
           aria-label="Main"
-          className="absolute inset-x-0 top-full h-[calc(100dvh-100%)] overflow-y-auto border-t border-border bg-bg px-4 pt-6 pb-[max(2rem,env(safe-area-inset-bottom))] motion-safe:animate-sheet-in"
+          className="absolute inset-x-0 top-full h-[calc(100dvh-100%)] overflow-y-auto bg-bg px-4 pt-8 pb-[max(2rem,env(safe-area-inset-bottom))] text-ink motion-safe:animate-sheet-in sm:px-6"
         >
-          <ul className="space-y-1">
+          <ul className="divide-y divide-border border-y border-border">
             {nav.map((item, i) => (
               <li key={item.href} className="motion-safe:animate-rise" style={{ animationDelay: `${60 + i * 60}ms` } as CSSProperties}>
                 <Link
                   href={item.href}
                   onClick={() => setOpen(false)}
-                  className={`block rounded-md px-2 py-3 font-display text-4xl text-text active:bg-surface ${focusClass}`}
+                  className={`block py-4 text-xl font-light tracking-[0.14em] uppercase ${focusClass}`}
                 >
                   {item.label}
                 </Link>
               </li>
             ))}
           </ul>
-          <ul className="mt-8 flex flex-wrap gap-2 motion-safe:animate-rise" style={{ animationDelay: "320ms" }}>
+          <p className="mt-8 text-label text-text-muted motion-safe:animate-rise" style={{ animationDelay: "300ms" }}>
+            Our menu
+          </p>
+          <ul className="mt-3 flex flex-wrap gap-2 motion-safe:animate-rise" style={{ animationDelay: "340ms" }}>
             {categories.map((c) => (
               <li key={c.slug}>
-                <Link
-                  href={`/shop?category=${c.slug}`}
-                  onClick={() => setOpen(false)}
-                  className={`inline-flex rounded-full border-[1.5px] border-text px-4 py-2.5 text-sm font-medium ${focusClass}`}
-                >
+                <Link href={`/shop?category=${c.slug}`} onClick={() => setOpen(false)} className={buttonClass("outline", "", "sm")}>
                   {c.name}
                 </Link>
               </li>
             ))}
           </ul>
-          <div className="mt-8 motion-safe:animate-rise" style={{ animationDelay: "380ms" }}>
+          <div className="mt-8 motion-safe:animate-rise" style={{ animationDelay: "400ms" }}>
             <Link href="/shop" onClick={() => setOpen(false)} className={buttonClass("primary", "w-full")}>
               Shop now
             </Link>

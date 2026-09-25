@@ -12,7 +12,7 @@ export default function BuildABoxPage() {
   return (
     <Container className="py-12">
       <Eyebrow>Build a box</Eyebrow>
-      <h1 className="mt-2 text-display">Your box, your rules.</h1>
+      <h1 className="mt-2 text-hero">Your box, your rules.</h1>
       <p className="mt-4 max-w-xl text-lg">
         Mix any of our cookies. We bake every box fresh for your delivery day.
       </p>

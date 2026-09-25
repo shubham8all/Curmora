@@ -4,7 +4,12 @@ export const site = {
   tagline: "Layered, baked & boxed by hand",
   description:
     "Small-batch cookies, layer cups and French-style entremet cakes, baked fresh every morning and delivered to your door.",
-  announcement: "Baked fresh every morning · Order by 6 pm for next-day delivery",
+  /** Messages for the announcement bar, one shown at a time. */
+  announcements: [
+    "Baked fresh every morning in small batches",
+    "Order by 6 pm for next-day delivery",
+    "Free delivery on orders over ₹1,500",
+  ],
   delivery: {
     fee: 99,
     freeAbove: 1500,
@@ -19,7 +24,7 @@ export const site = {
 
 export const nav = [
   { href: "/shop", label: "Shop" },
-  { href: "/build-a-box", label: "Build a Box" },
+  { href: "/build-a-box", label: "Build a box" },
   { href: "/shop?category=gifting", label: "Gifting" },
-  { href: "/#story", label: "Our Story" },
+  { href: "/#story", label: "Our story" },
 ];

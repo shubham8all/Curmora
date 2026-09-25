@@ -8,7 +8,7 @@ export default function BagPage() {
   return (
     <Container className="py-12">
       <Eyebrow>Your bag</Eyebrow>
-      <h1 className="mt-2 text-display">Almost yours.</h1>
+      <h1 className="mt-2 text-hero">Almost yours.</h1>
       <BagView />
     </Container>
   );

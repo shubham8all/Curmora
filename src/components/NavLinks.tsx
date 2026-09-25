@@ -14,7 +14,7 @@ function isActive(href: string, pathname: string, category: string | null) {
   return pathname === path;
 }
 
-const linkClass = `relative rounded-sm py-2 font-medium text-text transition-colors hover:text-accent ${focusClass} after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5 after:origin-left after:scale-x-0 after:rounded-full after:bg-accent after:transition-transform after:duration-300 hover:after:scale-x-100 aria-[current=page]:text-accent aria-[current=page]:after:scale-x-100`;
+const linkClass = `relative py-2 text-[0.8125rem] font-medium tracking-[0.12em] text-ink uppercase ${focusClass} after:absolute after:inset-x-0 after:bottom-0.5 after:h-px after:origin-left after:scale-x-0 after:bg-ink after:transition-transform after:duration-300 hover:after:scale-x-100 aria-[current=page]:after:scale-x-100`;
 
 /** Desktop nav links. Marks the current section so shoppers always know where they are. */
 export function NavLinks({ items }: { items: Item[] }) {
@@ -22,7 +22,7 @@ export function NavLinks({ items }: { items: Item[] }) {
   const category = useSearchParams().get("category");
 
   return (
-    <ul className="flex items-center gap-8">
+    <ul className="flex items-center gap-7">
       {items.map((item) => (
         <li key={item.href}>
           <Link href={item.href} aria-current={isActive(item.href, pathname, category) ? "page" : undefined} className={linkClass}>
@@ -37,7 +37,7 @@ export function NavLinks({ items }: { items: Item[] }) {
 /** Same links without active state, shown while search params are unavailable during prerender. */
 export function NavLinksStatic({ items }: { items: Item[] }) {
   return (
-    <ul className="flex items-center gap-8">
+    <ul className="flex items-center gap-7">
       {items.map((item) => (
         <li key={item.href}>
           <Link href={item.href} className={linkClass}>

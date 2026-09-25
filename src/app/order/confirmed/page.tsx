@@ -8,7 +8,7 @@ export default function OrderConfirmedPage() {
   return (
     <Container className="py-12">
       <Eyebrow>Order placed</Eyebrow>
-      <h1 className="mt-2 text-display">It&apos;s in the oven.</h1>
+      <h1 className="mt-2 text-hero">It&apos;s in the oven.</h1>
       <OrderConfirmation />
     </Container>
   );

@@ -20,16 +20,17 @@ export function BagButton() {
   return (
     <Link
       href="/bag"
-      className={`relative grid size-11 place-items-center rounded-full border-[1.5px] border-text text-text transition-colors hover:bg-surface ${focusClass}`}
+      className={`relative inline-flex items-center gap-2 py-2 text-ink ${focusClass}`}
       aria-label={count ? `Bag, ${count} ${count === 1 ? "item" : "items"}` : "Bag, empty"}
     >
       <span key={`icon-${bump}`} className={bump ? "motion-safe:animate-wiggle" : ""}>
-        <Handbag aria-hidden className="size-5" weight="bold" />
+        <Handbag aria-hidden className="size-6" />
       </span>
+      <span className="hidden text-[0.8125rem] font-medium tracking-[0.12em] uppercase sm:inline">Bag</span>
       {count > 0 && (
         <span
           key={`count-${bump}`}
-          className={`absolute -top-1 -right-1 grid min-w-5 place-items-center rounded-full bg-accent px-1 text-xs leading-5 font-semibold text-on-accent tabular-nums ${bump ? "motion-safe:animate-pop" : ""}`}
+          className={`grid min-w-5 place-items-center rounded-sm bg-ink px-1 text-[0.6875rem] leading-5 font-semibold text-on-ink tabular-nums max-sm:absolute max-sm:-top-0.5 max-sm:-right-2 ${bump ? "motion-safe:animate-pop" : ""}`}
         >
           {count}
         </span>

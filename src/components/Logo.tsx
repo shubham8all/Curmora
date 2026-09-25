@@ -2,18 +2,22 @@ import Link from "next/link";
 import { site } from "@/data/site";
 import { focusClass } from "@/components/ui";
 
-/** Curmora mark (a "C" drawn as an open cookie) with the wordmark and a short descriptor. */
-export function Logo({ tone = "dark" }: { tone?: "dark" | "light" }) {
-  const light = tone === "light";
+/**
+ * Boxed wordmark: the name inside a hairline frame, with the descriptor sitting on the frame's
+ * bottom edge. `ground` must match the background so the descriptor can mask the line behind it.
+ */
+export function Logo({ ground = "rose", size = "md" }: { ground?: "rose" | "blush"; size?: "md" | "lg" }) {
+  const bg = ground === "rose" ? "bg-rose" : "bg-blush";
+  const lg = size === "lg";
   return (
-    <Link href="/" className={`group inline-flex items-center gap-3 rounded-full ${focusClass}`}>
-      <svg viewBox="0 0 64 64" aria-hidden className="size-10 shrink-0 transition-transform duration-300 group-hover:-rotate-12">
-        <circle cx="32" cy="32" r="32" className={light ? "fill-highlight" : "fill-primary"} />
-        <path d="M44.5 21.5a15 15 0 1 0 0 21" fill="none" strokeWidth="7" strokeLinecap="round" className={light ? "stroke-ink" : "stroke-bg"} />
-      </svg>
-      <span className="leading-none">
-        <span className="block font-display text-2xl tracking-tight">{site.name}</span>
-        <span className={`mt-1 block text-xs font-medium ${light ? "text-on-ink" : "text-text-muted"}`}>Small-batch bakery</span>
+    <Link href="/" aria-label={`${site.name} home`} className={`group inline-block text-ink ${focusClass}`}>
+      <span className={`relative block border border-ink text-center transition-colors group-hover:border-rose-deep ${lg ? "px-8 pt-4 pb-6" : "px-4 pt-1.5 pb-3 sm:px-5"}`}>
+        <span className={`block font-normal tracking-[0.32em] uppercase ${lg ? "text-4xl" : "text-xl sm:text-2xl"}`}>{site.name}</span>
+        <span
+          className={`absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 px-2 whitespace-nowrap font-medium tracking-[0.2em] uppercase ${bg} ${lg ? "text-[0.6875rem]" : "text-[0.5rem] sm:text-[0.5625rem]"}`}
+        >
+          Pâtisserie &amp; cookies
+        </span>
       </span>
     </Link>
   );

@@ -20,9 +20,9 @@ export function BagView() {
 
   if (lines.length === 0) {
     return (
-      <div className="mt-8 rounded-md border border-border bg-surface p-8 text-center shadow-soft">
-        <p className="font-display text-2xl text-on-surface">Your bag is empty.</p>
-        <p className="mt-2 text-on-surface">Fresh cookies, layer cups and cakes are a click away.</p>
+      <div className="mt-8 border border-border bg-surface p-8 text-center">
+        <p className="text-title">Your bag is empty</p>
+        <p className="mt-2 text-ink">Fresh cookies, layer cups and cakes are a click away.</p>
         <div className="mt-8 flex flex-wrap justify-center gap-4">
           <Link href="/shop" className={buttonClass("primary")}>
             Shop the menu
@@ -37,18 +37,18 @@ export function BagView() {
 
   return (
     <div className="mt-8 grid gap-8 pb-24 lg:grid-cols-[minmax(0,1fr)_22rem] 2xl:grid-cols-[minmax(0,64rem)_24rem] 2xl:justify-between lg:items-start lg:pb-0">
-      <ul className="divide-y divide-border rounded-md border border-border bg-surface shadow-soft">
+      <ul className="divide-y divide-border border border-border bg-surface">
         {lines.map((line) => {
           const product = getProduct(line.slug)!;
           const isBox = line.slug === BUILD_A_BOX_SLUG;
           return (
             <li key={line.key} className="flex flex-col gap-4 p-4 sm:flex-row sm:items-center">
-              <ProductArt art={product.art} seed={product.slug} className="size-20 shrink-0 rounded-md bg-bg p-1 inset-shadow-well" />
-              <div className="min-w-0 flex-1 text-on-surface">
+              <ProductArt art={product.art} seed={product.slug} className="size-20 shrink-0 bg-bg p-1" />
+              <div className="min-w-0 flex-1 text-ink">
                 {isBox ? (
-                  <p className="font-display text-lg">{line.name}</p>
+                  <p className="text-lg font-light">{line.name}</p>
                 ) : (
-                  <Link href={`/shop/${line.slug}`} className={`rounded-sm font-display text-lg hover:underline ${focusClass}`}>
+                  <Link href={`/shop/${line.slug}`} className={`rounded-sm text-lg font-light hover:underline ${focusClass}`}>
                     {line.name}
                   </Link>
                 )}
@@ -63,7 +63,7 @@ export function BagView() {
                   <button type="button" onClick={() => bag.remove(line.key)} className={`rounded-sm text-sm underline underline-offset-4 ${focusClass}`}>
                     Remove<span className="sr-only"> {line.name}</span>
                   </button>
-                  <span className="font-semibold tabular-nums text-on-surface">{formatPrice(line.lineTotal)}</span>
+                  <span className="font-semibold tabular-nums text-ink">{formatPrice(line.lineTotal)}</span>
                 </div>
               </div>
             </li>
@@ -86,7 +86,7 @@ export function BagView() {
             <p className="text-sm font-medium">
               {t.itemCount} {t.itemCount === 1 ? "item" : "items"}
             </p>
-            <p className="font-display text-xl tabular-nums">{formatPrice(t.total)}</p>
+            <p className="text-xl font-light tabular-nums">{formatPrice(t.total)}</p>
           </div>
           <Link href="/checkout" className={buttonClass("primary")}>
             Checkout

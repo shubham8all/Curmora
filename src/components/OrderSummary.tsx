@@ -18,8 +18,8 @@ export function OrderSummary({
   const toFree = site.delivery.freeAbove - subtotal;
 
   return (
-    <div className="rounded-md border border-border bg-surface p-6 text-on-surface shadow-soft">
-      <h2 className="font-display text-2xl">Order summary</h2>
+    <div className=" border border-border bg-surface p-6 text-ink">
+      <h2 className="text-title">Order summary</h2>
       <dl className="mt-4 space-y-2">
         <div className="flex justify-between gap-4">
           <dt>Subtotal</dt>
@@ -31,7 +31,7 @@ export function OrderSummary({
         </div>
         <div className="flex justify-between gap-4 border-t border-border pt-2">
           <dt className="text-label self-center">Total</dt>
-          <dd className="font-display text-2xl tabular-nums">{formatPrice(total)}</dd>
+          <dd className="text-2xl font-light tabular-nums">{formatPrice(total)}</dd>
         </div>
       </dl>
       {fulfilment === "delivery" && toFree > 0 && (

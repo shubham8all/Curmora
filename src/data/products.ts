@@ -52,13 +52,17 @@ export type Product = {
 };
 
 /** Tile backgrounds per tone. Literal class names so Tailwind picks them up. */
-/** Brush paint colours per tone (BrushPanel `paint`). Literal class names so Tailwind picks them up. */
-export const tonePaint: Record<Tone, string> = {
-  pink: "bg-pink-100",
-  beige: "bg-beige-100",
-  forest: "bg-forest-100",
-  sage: "bg-sage-100",
-  burgundy: "bg-burgundy-100",
+/**
+ * Two-tone diagonal backdrops per tone (design.md product tiles). Every tone includes a pink half so
+ * the menu reads as one styled shoot, and no half matches the cream page. Literal class names so
+ * Tailwind picks them up.
+ */
+export const toneSplit: Record<Tone, string> = {
+  pink: "[--split-a:var(--color-pink-100)] [--split-b:var(--color-pink-200)]",
+  beige: "[--split-a:var(--color-pink-200)] [--split-b:var(--color-pink-100)]",
+  forest: "[--split-a:var(--color-forest-100)] [--split-b:var(--color-pink-100)]",
+  sage: "[--split-a:var(--color-sage-200)] [--split-b:var(--color-pink-100)]",
+  burgundy: "[--split-a:var(--color-burgundy-200)] [--split-b:var(--color-pink-100)]",
 };
 
 export const categories: Category[] = [

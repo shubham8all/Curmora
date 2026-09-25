@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getCategory, getProduct, listProducts, tonePaint } from "@/data/products";
+import { getCategory, getProduct, listProducts, toneSplit } from "@/data/products";
 import { ProductArt } from "@/components/ProductArt";
 import { ProductCard } from "@/components/ProductCard";
 import { AddToBag } from "@/components/AddToBag";
-import { Badge, BrushPanel, Container, SectionTitle, focusClass } from "@/components/ui";
+import { Badge, Container, SectionTitle, focusClass } from "@/components/ui";
 
 export function generateStaticParams() {
   return listProducts().map((p) => ({ slug: p.slug }));
@@ -32,40 +32,41 @@ export default async function ProductPage(props: PageProps<"/shop/[slug]">) {
 
   return (
     <>
-      <Container className="py-6">
+      <Container className="py-5">
         <nav aria-label="Breadcrumb">
-          <ol className="flex flex-wrap gap-2 text-sm">
+          <ol className="flex flex-wrap gap-2 text-label text-text-muted">
             <li>
-              <Link href="/shop" className={`rounded-sm underline underline-offset-4 ${focusClass}`}>
+              <Link href="/shop" className={`hover:text-ink ${focusClass}`}>
                 Shop
               </Link>
               <span aria-hidden className="ml-2">/</span>
             </li>
             <li>
-              <Link href={`/shop?category=${category.slug}`} className={`rounded-sm underline underline-offset-4 ${focusClass}`}>
+              <Link href={`/shop?category=${category.slug}`} className={`hover:text-ink ${focusClass}`}>
                 {category.name}
               </Link>
               <span aria-hidden className="ml-2">/</span>
             </li>
-            <li aria-current="page">{product.name}</li>
+            <li aria-current="page" className="text-ink">
+              {product.name}
+            </li>
           </ol>
         </nav>
       </Container>
 
       <Container className="grid gap-10 pb-32 md:grid-cols-12 md:gap-12 md:pb-28">
-        <BrushPanel paint={tonePaint[product.tone]} shape={1} className="self-start p-10 md:sticky md:top-28 md:col-span-7">
-          <ProductArt art={product.art} seed={product.slug} doodles title={`Illustration of ${product.name}`} className="mx-auto aspect-square w-full max-w-lg" />
-          <div className="absolute top-6 left-6 flex flex-col items-start gap-2">
+        <div className={`relative aspect-[4/5] self-start overflow-hidden backdrop-split md:sticky md:top-32 md:col-span-7 lg:aspect-square ${toneSplit[product.tone]}`}>
+          <ProductArt art={product.art} seed={product.slug} title={`Illustration of ${product.name}`} className="absolute inset-[12%]" />
+          <div className="absolute top-4 left-4 flex flex-col items-start gap-2">
             {product.bestseller && <Badge>Bestseller</Badge>}
-            {product.eggless && <Badge tone="highlight">Eggless</Badge>}
+            {product.eggless && <Badge tone="surface">Eggless</Badge>}
           </div>
-        </BrushPanel>
+        </div>
 
         <div className="md:col-span-5">
-          <h1 className="font-display text-5xl leading-[1.05] tracking-tight text-text md:text-6xl">
-            {product.name}
-          </h1>
-          <p className="mt-4 text-xl font-medium text-primary">{product.tagline}</p>
+          <p className="text-label text-text-muted">{category.name}</p>
+          <h1 className="mt-3 text-hero">{product.name}</h1>
+          <p className="mt-3 text-lg font-light italic">{product.tagline}</p>
           <p className="mt-4 text-body-md">{product.description}</p>
 
           <div className="mt-8 border-t border-border pt-8">
@@ -73,12 +74,12 @@ export default async function ProductPage(props: PageProps<"/shop/[slug]">) {
           </div>
 
           <section aria-labelledby="inside" className="mt-12">
-            <h2 id="inside" className="font-display text-3xl tracking-tight text-text">
+            <h2 id="inside" className="text-title">
               {layered ? "The layers" : "What's inside"}
             </h2>
             {layered ? (
               <>
-                <p className="mt-2 text-sm">From top to bottom.</p>
+                <p className="mt-1 text-sm text-text-muted">From top to bottom.</p>
                 {/* A cross-section of the dessert: one colour band per layer, labelled alongside. */}
                 <ol className="mt-6">
                   {product.inside.map((item, i) => {
@@ -88,12 +89,12 @@ export default async function ProductPage(props: PageProps<"/shop/[slug]">) {
                       <li key={item.name} className="grid grid-cols-[4.5rem_1fr] gap-x-6">
                         <span
                           aria-hidden
-                          className={`block border-x-2 border-text ${first ? "rounded-t-lg border-t-2" : ""} ${last ? "rounded-b-lg border-b-2" : "border-b border-b-ink/20"}`}
+                          className={`block border-x border-ink ${first ? "border-t" : ""} ${last ? "border-b" : "border-b border-b-ink/20"}`}
                           style={{ background: `var(--color-${item.color})` }}
                         />
                         <div className={`py-4 ${last ? "" : "border-b border-border"}`}>
-                          <p className="font-semibold text-text">{item.name}</p>
-                          <p className="text-sm">{item.detail}</p>
+                          <p className="font-medium">{item.name}</p>
+                          <p className="text-sm text-text-muted">{item.detail}</p>
                         </div>
                       </li>
                     );
@@ -103,11 +104,11 @@ export default async function ProductPage(props: PageProps<"/shop/[slug]">) {
             ) : (
               <ul className="mt-6 grid gap-3 sm:grid-cols-2">
                 {product.inside.map((item) => (
-                  <li key={item.name} className="flex items-center gap-4 rounded-md bg-surface p-4 inset-shadow-well">
-                    <span aria-hidden className="size-10 shrink-0 rounded-md border-2 border-text" style={{ background: `var(--color-${item.color})` }} />
+                  <li key={item.name} className="flex items-center gap-4 border border-border bg-surface p-4">
+                    <span aria-hidden className="size-10 shrink-0 border border-ink" style={{ background: `var(--color-${item.color})` }} />
                     <span>
-                      <span className="block font-semibold text-text">{item.name}</span>
-                      <span className="block text-sm">{item.detail}</span>
+                      <span className="block font-medium">{item.name}</span>
+                      <span className="block text-sm text-text-muted">{item.detail}</span>
                     </span>
                   </li>
                 ))}
@@ -116,13 +117,13 @@ export default async function ProductPage(props: PageProps<"/shop/[slug]">) {
           </section>
 
           <section aria-labelledby="good-to-know" className="mt-12">
-            <h2 id="good-to-know" className="font-display text-3xl tracking-tight text-text">
+            <h2 id="good-to-know" className="text-title">
               Good to know
             </h2>
             <dl className="mt-6 grid grid-cols-2 gap-x-6 gap-y-6">
               {[...product.details, { label: "Eggless", value: product.eggless ? "Yes" : "No, contains egg" }].map((d) => (
                 <div key={d.label}>
-                  <dt className="text-label text-accent">{d.label}</dt>
+                  <dt className="text-label text-text-muted">{d.label}</dt>
                   <dd className="mt-1 text-text">{d.value}</dd>
                 </div>
               ))}
@@ -132,10 +133,10 @@ export default async function ProductPage(props: PageProps<"/shop/[slug]">) {
       </Container>
 
       {related.length > 0 && (
-        <section className="border-t border-border bg-surface py-20 md:py-28">
+        <section className="bg-blush py-14 md:py-20">
           <Container>
             <SectionTitle>You might also like</SectionTitle>
-            <ul className="mt-10 grid grid-cols-2 gap-x-3 gap-y-6 sm:gap-x-6 sm:gap-y-12 lg:grid-cols-3">
+            <ul className="mt-6 grid grid-cols-2 gap-x-3 gap-y-8 sm:gap-x-4 lg:grid-cols-3">
               {related.map((p) => (
                 <li key={p.slug}>
                   <ProductCard product={p} />

@@ -16,10 +16,10 @@ export function QtyStepper({
   /** Accessible label, e.g. "Quantity of Tiramisu Cup". */
   label: string;
 }) {
-  const btn = `grid size-11 place-items-center rounded-full text-lg text-text hover:bg-surface-alt disabled:cursor-not-allowed disabled:opacity-40 ${focusClass}`;
+  const btn = `grid size-11 place-items-center text-lg text-text hover:bg-blush disabled:cursor-not-allowed disabled:opacity-40 ${focusClass}`;
 
   return (
-    <div role="group" aria-label={label} className="inline-flex items-center rounded-full border-[1.5px] border-text bg-bg">
+    <div role="group" aria-label={label} className="inline-flex items-center border border-ink bg-bg">
       <button type="button" className={btn} onClick={() => onChange(value - 1)} disabled={value <= min} aria-label="Decrease quantity">
         −
       </button>

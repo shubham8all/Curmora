@@ -1,23 +1,21 @@
 ---
-version: "beta"
-name: "Brushstroke Market"
-description: "Warm market-stall visual system for Curmora. Big soft-serif headlines, colour blocks painted on with rough brush edges, pill-shaped buttons and friendly sans-serif body text, all drawn from the Curmora brand palette."
+version: "1.0"
+name: "Rose Atelier"
+description: "Soft French patisserie system for Curmora: rose header, peach and cream bands, square corners, small uppercase headings with wide tracking, set entirely in Montserrat."
 colors:
-  primary: "#6a664a"
-  background: "#faf6f0"
-  surface: "#f5ece0"
-  surface-alt: "#eaeacf"
-  text: "#201b12"
-  text-muted: "#70614a"
-  border: "#c0c0a9"
-  accent: "#8f4f48"
-  highlight: "#efe7ab"
+  background: "#f5ece0"
+  surface: "#faf6f0"
+  blush: "#e5c8c6"
+  rose: "#ce827b"
+  rose-deep: "#6e3b36"
   ink: "#201b12"
-  on-primary: "#faf6f0"
-  on-surface: "#201b12"
-  on-accent: "#faf6f0"
-  on-highlight: "#201b12"
-  on-ink: "#f5ece0"
+  text: "#201b12"
+  text-muted: "#534735"
+  muted: "#c0c0a9"
+  border: "#c0c0a9"
+  on-rose: "#201b12"
+  on-rose-deep: "#faf6f0"
+  on-ink: "#faf6f0"
   pink-50: "#f8f2f2"
   pink-100: "#f1e2e1"
   pink-200: "#e5c8c6"
@@ -74,78 +72,85 @@ colors:
   burgundy-900: "#523445"
   burgundy-950: "#2f1c27"
 typography:
-  display:
-    fontFamily: "'Young Serif', 'Georgia', serif"
-    fontSize: "clamp(3rem, 6vw + 1rem, 6rem)"
+  font-family: "'Montserrat', system-ui, sans-serif"
+  hero:
+    fontSize: "clamp(1.5rem, 1.5vw + 1rem, 2.25rem)"
     fontWeight: "400"
+    lineHeight: "1.25"
+    letterSpacing: "0.08em"
+    textTransform: "uppercase"
+  title:
+    fontSize: "0.9375rem"
+    fontWeight: "500"
+    lineHeight: "1.3"
+    letterSpacing: "0.14em"
+    textTransform: "uppercase"
+  feature:
+    fontSize: "clamp(2rem, 3vw + 1rem, 3.5rem)"
+    fontWeight: "300"
+    fontStyle: "italic"
+    lineHeight: "1.15"
+  marquee:
+    fontSize: "clamp(3rem, 6vw + 1rem, 6.5rem)"
+    fontWeight: "300"
     lineHeight: "1"
-    letterSpacing: "-0.02em"
-  h2:
-    fontFamily: "'Young Serif', 'Georgia', serif"
-    fontSize: "clamp(2rem, 3vw + 1rem, 3.25rem)"
-    fontWeight: "400"
-    lineHeight: "1.1"
-    letterSpacing: "-0.01em"
-  h3:
-    fontFamily: "'Young Serif', 'Georgia', serif"
-    fontSize: "1.5rem"
-    fontWeight: "400"
-    lineHeight: "1.2"
   body-md:
-    fontFamily: "'Outfit', system-ui, sans-serif"
     fontSize: "1rem"
     fontWeight: "400"
-    lineHeight: "1.6"
+    lineHeight: "1.7"
   label:
-    fontFamily: "'Outfit', system-ui, sans-serif"
-    fontSize: "0.9375rem"
-    fontWeight: "600"
+    fontSize: "0.75rem"
+    fontWeight: "500"
     lineHeight: "1.2"
+    letterSpacing: "0.14em"
+    textTransform: "uppercase"
 rounded:
-  sm: "6px"
-  md: "10px"
-  pill: "9999px"
+  none: "0px"
+  sm: "4px"
 spacing:
   sm: "8px"
   md: "16px"
   lg: "32px"
   xl: "64px"
 components:
-  button-primary:
-    backgroundColor: "{colors.primary}"
-    textColor: "{colors.on-primary}"
-    rounded: "{rounded.pill}"
-    padding: "12px 24px"
-  button-accent:
-    backgroundColor: "{colors.accent}"
-    textColor: "{colors.on-accent}"
-    rounded: "{rounded.pill}"
-    padding: "12px 24px"
-  button-highlight:
-    backgroundColor: "{colors.highlight}"
-    textColor: "{colors.on-highlight}"
-    rounded: "{rounded.pill}"
-    padding: "12px 24px"
+  button-dark:
+    backgroundColor: "{colors.ink}"
+    textColor: "{colors.on-ink}"
+    rounded: "{rounded.none}"
+    padding: "14px 24px"
+  button-light:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.none}"
+    padding: "14px 24px"
+  button-muted:
+    backgroundColor: "{colors.muted}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.none}"
+    padding: "14px 24px"
   button-outline:
     backgroundColor: "transparent"
     textColor: "currentColor"
-    border: "1.5px solid currentColor"
-    rounded: "{rounded.pill}"
-    padding: "12px 24px"
-  brush-panel:
-    backgroundColor: "{colors.primary}"
-    textColor: "{colors.on-primary}"
-    edge: "brush"
-    padding: "48px"
-  card:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.on-surface}"
-    edge: "brush"
-    padding: "32px"
+    border: "1px solid currentColor"
+    rounded: "{rounded.none}"
+    padding: "14px 24px"
+  header:
+    backgroundColor: "{colors.rose}"
+    textColor: "{colors.on-rose}"
+  band:
+    backgroundColor: "{colors.blush}"
+    textColor: "{colors.ink}"
+    padding: "64px 16px"
+  feature-band:
+    backgroundColor: "{colors.rose-deep}"
+    textColor: "{colors.on-rose-deep}"
+  product-tile:
+    backgroundColor: "diagonal split of pink-100 and pink-200"
+    rounded: "{rounded.none}"
   input:
-    backgroundColor: "{colors.background}"
-    border: "1.5px solid {colors.border}"
-    rounded: "{rounded.md}"
+    backgroundColor: "{colors.surface}"
+    border: "1px solid {colors.border}"
+    rounded: "{rounded.none}"
   page:
     backgroundColor: "{colors.background}"
     textColor: "{colors.text}"
@@ -153,32 +158,31 @@ components:
 ---
 ## Overview
 
-Brushstroke Market is a warm, hand-made system for a small-batch bakery. Pages feel like a market stall: colour blocks look painted on with a wide brush, headlines are big and soft, and every action is a friendly pill. It replaces the earlier Emboss / Deboss system.
+Rose Atelier is a calm, feminine patisserie system inspired by boutique French pastry shops. A dusty-rose header sits over cream pages broken up by soft peach bands. Everything is quiet and square: small uppercase headings with generous letter spacing, rectangular buttons, edge-to-edge sections, and product illustrations on two-tone pink backdrops. It replaces the earlier Brushstroke Market system.
 
-- **Category:** hand-made / organic
-- **Reference:** Illustrated snack and bakery storefronts with painted colour blocks.
-- **Structural base:** full-width responsive 12-column grid with side padding.
+- **Category:** editorial / boutique retail
+- **Reference:** French patisserie storefronts with rose branding, split heroes and pastry flat-lays.
+- **Structural base:** full-width 12-column grid with side padding.
 
 **Defining traits:**
-- Colour blocks with rough, brush-painted edges and faint bristle streaks
-- Big soft-serif display type (Young Serif) over friendly sans-serif body (Outfit)
-- Pill-shaped buttons, chips and nav actions
-- Products break out of their colour blocks, with soft shadows underneath
-- Cream page ground with olive, terracotta-red and butter-yellow accents
+- One typeface, Montserrat, for everything
+- Small uppercase headings with wide tracking; italic light for feature lines
+- Dusty-rose header, peach bands, cream ground
+- Square corners on buttons, tiles, cards and inputs
+- Gingham check strips and flat-lay illustrations as signature details
 
 ## Colors
 
-- **background** #faf6f0 (beige-50): page ground
-- **surface** #f5ece0 (beige-100): warm card blocks
-- **surface-alt** #eaeacf (sage-100): cool card blocks
-- **primary** #6a664a (forest-600): hero block, main buttons, product cards
-- **accent** #8f4f48 (pink-600): banner block, active nav, bullets, accent buttons
-- **highlight** #efe7ab (forest-100): butter-yellow pills and chips
-- **ink** #201b12 (beige-900): headings, body text, footer block
-- **text-muted** #70614a (beige-600): secondary text
-- **border** #c0c0a9 (sage-300): hairlines and input borders
+- **background** #f5ece0 (beige-100): page ground
+- **surface** #faf6f0 (beige-50): cards, inputs, light buttons
+- **blush** #e5c8c6 (pink-200): peach bands (announcement, hero panel, values, footer)
+- **rose** #ce827b (pink-400): header bar, gingham, accents
+- **rose-deep** #6e3b36 (pink-700): feature band, accent text, errors
+- **ink** #201b12 (beige-900): text, dark buttons
+- **text-muted** #534735 (beige-700): secondary text
+- **muted** #c0c0a9 (sage-300): muted buttons, hairlines
 
-**Contrast (WCAG AA):** on-primary on primary 5.4:1, on-accent on accent 5.7:1, ink on background 15.9:1, text-muted on background 5.5:1, on-highlight on highlight 13.6:1. `pink-500` and lighter scale steps do not pass as small text on light grounds; use them for fills only.
+**Contrast (WCAG AA):** ink on background 14.6:1, ink on blush 10.9:1, ink on rose 5.8:1, on-rose-deep on rose-deep 8.3:1, text-muted on background 7.7:1 and on blush 5.8:1, ink on muted 9.2:1. Cream text on rose is only 2.7:1, so the header uses ink text.
 
 ## Brand Palette
 
@@ -200,42 +204,42 @@ Project colour scales for the website / app. Use these alongside the semantic to
 
 ## Typography
 
-- Display and headings: 'Young Serif', 'Georgia', serif (one weight; hierarchy comes from size)
-- Body and UI: 'Outfit', system-ui, sans-serif (400 body, 500 emphasis, 600 labels and buttons)
-- Labels are sentence case, never all caps.
-- Headlines use tight leading (1 to 1.1) and slight negative tracking.
+- Montserrat only (300, 400, 500, 600 and italics). No second typeface.
+- **Hero:** uppercase 400 with 0.08em tracking, modest size, centred in its panel.
+- **Title:** section headings are small uppercase 500 with 0.14em tracking, left aligned.
+- **Feature:** italic 300 for large statement lines on the feature band.
+- **Marquee:** 300 at display size for the scrolling band.
+- **Body:** 400 at 16px with 1.7 line height. Labels and buttons are uppercase 500 at 12 to 13px with 0.14em tracking.
 
 ## Layout
 
-- Full-width 12-column grid, edge to edge with side padding: 16px on phones, 24px from 640px, 40px from 1024px, 64px from 1536px. No maximum page width; grids add columns on wide screens instead of stretching.
-- Colour blocks sit inside the container, not edge to edge, so their brushed edges show against the cream ground.
-- Products break out of the top or side of their block.
+- Full-width 12-column grid, edge to edge with side padding: 16px on phones, 24px from 640px, 40px from 1024px, 64px from 1536px.
+- Sections alternate cream and blush bands; the feature band is rose-deep.
+- Horizontal rows (the menu) scroll sideways with snap on every screen size.
 - Collapse columns below 768px without horizontal overflow.
 
 ## Elevation & Depth
 
-- Depth comes from overlap: products sit over block edges with a soft shadow beneath them.
-- Shadows are warm and soft (`0 16px 32px -16px` in ink at 35%). No hard or black shadows.
-- No text shadows.
+- Flat. No shadows on tiles or buttons; separation comes from colour bands and spacing.
+- Products may carry the illustrations' own ground shadow.
 
 ## Shapes
 
-- Colour blocks and cards: brush-painted edges with faint dry-brush streaks, no corner radius. The edges are pre-rendered masks (`public/brush/`), applied as 9-slice mask borders so they keep the same scale at any size.
-- Buttons, chips and nav actions: pill (9999px).
-- Inputs and small images: 6px or 10px radius.
+- Square corners (0px) on buttons, tiles, cards, inputs and panels. 4px only for tiny badges.
+- Gingham check (rose on surface) as a strip under the marquee band and as the hero flat-lay cloth.
 
 ## Components
 
-- **Buttons:** pill-shaped. Primary (olive), accent (red), highlight (butter) and outline (1.5px current colour). Visible focus ring, lift on hover, press down on click.
-- **Brush panel:** a colour block with brushed edges. Content never gets the filter; only the painted background does.
-- **Chips:** small pills for categories and filters.
-- **Bullets:** small accent-red dots before short list items.
-- **Forms:** persistent labels above inputs, helper text, textual errors below in accent red, cream inputs with a 1.5px border.
+- **Header:** announcement bar in blush with previous and next arrows; rose bar with uppercase nav left, boxed logo centre, bag right.
+- **Buttons:** rectangular, uppercase labels. Dark (ink), light (surface), muted (sage) and outline. Visible focus ring, gentle lift on hover.
+- **Menu tiles:** tall 4:5 tiles with a two-tone pink diagonal backdrop, uppercase label below.
+- **Product tiles:** same backdrop, name in sentence case and price below, quick add on hover.
+- **Values:** three columns of thin line icons with uppercase titles on a blush band.
+- **Forms:** persistent labels above inputs, helper text, textual errors below in rose-deep, square surface inputs with a 1px border.
 
 ## Do's and Don'ts
 
-- Do: keep text on solid fills, never across the brushed edge.
+- Do: keep headings small and tracked; let space and colour bands do the work.
 - Do: maintain WCAG AA contrast and respect `prefers-reduced-motion`.
-- Do: use one colour block per section; alternate warm (surface) and cool (surface-alt) blocks.
-- Don't: brush-edge small elements like buttons or inputs.
-- Don't: use scale steps lighter than 600 for small text.
+- Don't: round corners, add drop shadows, or use a second typeface.
+- Don't: put cream text on the rose header or on blush.

@@ -101,7 +101,7 @@ const labels: Record<keyof Values, string> = {
   instructions: "Instructions",
 };
 
-const inputClass = `mt-1 block w-full rounded-md border border-text bg-beige-50 px-4 py-2 text-on-surface inset-shadow-well aria-invalid:border-2 aria-invalid:border-accent ${focusClass}`;
+const inputClass = `mt-1 block w-full border border-ink bg-beige-50 px-4 py-2 text-ink aria-invalid:border-2 aria-invalid:border-rose-deep ${focusClass}`;
 
 function Field({
   id,
@@ -131,7 +131,7 @@ function Field({
       )}
       {children}
       {error && (
-        <p id={`${id}-error`} className="mt-1 text-sm font-semibold text-accent">
+        <p id={`${id}-error`} className="mt-1 text-sm font-semibold text-rose-deep">
           {error}
         </p>
       )}
@@ -158,8 +158,8 @@ export function CheckoutForm() {
 
   if (lines.length === 0 && !placing) {
     return (
-      <div className="mt-8 rounded-md border border-border bg-surface p-8 shadow-soft">
-        <p className="font-display text-2xl text-on-surface">There&apos;s nothing to check out yet.</p>
+      <div className="mt-8 border border-border bg-surface p-8">
+        <p className="text-2xl font-light text-ink">There&apos;s nothing to check out yet.</p>
         <Link href="/shop" className={buttonClass("primary", "mt-4")}>
           Shop the menu
         </Link>
@@ -221,8 +221,8 @@ export function CheckoutForm() {
     <form noValidate onSubmit={onSubmit} className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_22rem] 2xl:grid-cols-[minmax(0,64rem)_24rem] 2xl:justify-between lg:items-start">
       <div className="space-y-8">
         {errorEntries.length > 0 && (
-          <div ref={summaryRef} tabIndex={-1} role="alert" className={`rounded-md border-2 border-accent bg-pink-50 p-4 text-on-surface ${focusClass}`}>
-            <p className="font-display text-xl">
+          <div ref={summaryRef} tabIndex={-1} role="alert" className={` border-2 border-rose-deep bg-pink-50 p-4 text-ink ${focusClass}`}>
+            <p className="text-xl font-light">
               Please fix {errorEntries.length === 1 ? "this" : `these ${errorEntries.length} things`} to place your order:
             </p>
             <ul className="mt-2 list-disc space-y-1 pl-6">
@@ -237,8 +237,8 @@ export function CheckoutForm() {
           </div>
         )}
 
-        <fieldset className="rounded-md border border-border bg-surface p-6 shadow-soft">
-          <legend className="px-2 font-display text-2xl text-text">How would you like it?</legend>
+        <fieldset className=" border border-border bg-surface p-6">
+          <legend className="px-2 text-title">How would you like it?</legend>
           <div className="grid gap-2 sm:grid-cols-2">
             {(
               [
@@ -248,12 +248,12 @@ export function CheckoutForm() {
             ).map((opt) => (
               <label
                 key={opt.id}
-                className={`cursor-pointer rounded-md border p-4 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-(--focus-ring) ${
-                  values.fulfilment === opt.id ? "border-text bg-surface-alt inset-shadow-well" : "border-border bg-bg shadow-soft hover:border-text"
+                className={`cursor-pointer border p-4 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-(--focus-ring) ${
+                  values.fulfilment === opt.id ? "border-ink bg-blush" : "border-border bg-bg hover:border-ink"
                 }`}
               >
                 <input type="radio" name="fulfilment" value={opt.id} checked={values.fulfilment === opt.id} onChange={() => set("fulfilment", opt.id)} className="sr-only" />
-                <span className="block font-display text-xl text-text">{opt.title}</span>
+                <span className="block text-xl font-light text-text">{opt.title}</span>
                 <span className="block text-sm">{opt.body}</span>
               </label>
             ))}
@@ -261,8 +261,8 @@ export function CheckoutForm() {
           {values.fulfilment === "pickup" && <p className="mt-4 text-sm">{site.pickup.note}</p>}
         </fieldset>
 
-        <fieldset className="space-y-4 rounded-md border border-border bg-surface p-6 shadow-soft">
-          <legend className="px-2 font-display text-2xl text-text">Your details</legend>
+        <fieldset className="space-y-4 border border-border bg-surface p-6">
+          <legend className="px-2 text-title">Your details</legend>
           <Field id="name" label={labels.name} error={errors.name}>
             <input {...fieldProps("name")} autoComplete="name" onChange={(e) => set("name", e.target.value)} />
           </Field>
@@ -277,8 +277,8 @@ export function CheckoutForm() {
         </fieldset>
 
         {values.fulfilment === "delivery" && (
-          <fieldset className="space-y-4 rounded-md border border-border bg-surface p-6 shadow-soft">
-            <legend className="px-2 font-display text-2xl text-text">Delivery address</legend>
+          <fieldset className="space-y-4 border border-border bg-surface p-6">
+            <legend className="px-2 text-title">Delivery address</legend>
             <Field id="address" label={labels.address} error={errors.address} hint="House or flat number, building and street.">
               <input {...fieldProps("address", true)} autoComplete="street-address" onChange={(e) => set("address", e.target.value)} />
             </Field>
@@ -296,8 +296,8 @@ export function CheckoutForm() {
           </fieldset>
         )}
 
-        <fieldset className="space-y-4 rounded-md border border-border bg-surface p-6 shadow-soft">
-          <legend className="px-2 font-display text-2xl text-text">When?</legend>
+        <fieldset className="space-y-4 border border-border bg-surface p-6">
+          <legend className="px-2 text-title">When?</legend>
           <div className="grid gap-4 sm:grid-cols-2">
             <Field id="date" label={labels.date} error={errors.date} hint={`Order by ${site.delivery.cutoff} for next-day ${values.fulfilment}.`}>
               <input {...fieldProps("date", true)} type="date" min={minDate || undefined} max={maxDate || undefined} onChange={(e) => set("date", e.target.value)} />
@@ -315,8 +315,8 @@ export function CheckoutForm() {
           </div>
         </fieldset>
 
-        <fieldset className="space-y-4 rounded-md border border-border bg-surface p-6 shadow-soft">
-          <legend className="px-2 font-display text-2xl text-text">Extras</legend>
+        <fieldset className="space-y-4 border border-border bg-surface p-6">
+          <legend className="px-2 text-title">Extras</legend>
           <Field id="giftNote" label={labels.giftNote} error={errors.giftNote} optional hint={`We'll handwrite it on a card. ${values.giftNote.length}/${GIFT_NOTE_MAX} characters.`}>
             <textarea {...fieldProps("giftNote", true)} rows={3} onChange={(e) => set("giftNote", e.target.value)} />
           </Field>
@@ -338,7 +338,7 @@ export function CheckoutForm() {
               </li>
             ))}
           </ul>
-          <p className="mt-4 rounded-md bg-bg p-2 text-sm inset-shadow-well">
+          <p className="mt-4 bg-bg p-2 text-sm">
             Pay on {values.fulfilment === "pickup" ? "pickup" : "delivery"} by UPI, card or cash. We&apos;ll confirm your order by phone.
           </p>
           <button type="submit" disabled={placing} className={buttonClass("primary", "mt-4 w-full")}>

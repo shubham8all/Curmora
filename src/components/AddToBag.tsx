@@ -50,7 +50,7 @@ export function AddToBag({ product }: { product: Product }) {
 
   return (
     <div className="space-y-8">
-      <p className="font-display text-3xl text-text tabular-nums">{formatPrice(variant.price * qty)}</p>
+      <p className="text-3xl font-light text-text tabular-nums">{formatPrice(variant.price * qty)}</p>
 
       {product.variants.length > 1 && (
         <fieldset>
@@ -59,8 +59,8 @@ export function AddToBag({ product }: { product: Product }) {
             {product.variants.map((v) => (
               <label
                 key={v.id}
-                className={`cursor-pointer rounded-md border-[1.5px] px-4 py-2.5 transition-colors has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-(--focus-ring) ${
-                  v.id === variantId ? "border-primary bg-primary text-on-primary" : "border-border bg-surface text-text hover:border-text"
+                className={`cursor-pointer border px-4 py-2.5 transition-colors has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-(--focus-ring) ${
+                  v.id === variantId ? "border-ink bg-ink text-on-ink" : "border-border bg-surface text-text hover:border-ink"
                 }`}
               >
                 <input
@@ -92,7 +92,7 @@ export function AddToBag({ product }: { product: Product }) {
             setAdded(null);
           }}
         />
-        <button ref={mainButton} type="button" onClick={add} className={buttonClass(justAdded ? "accent" : "primary", "min-w-48 flex-1 sm:flex-none")}>
+        <button ref={mainButton} type="button" onClick={add} className={buttonClass(justAdded ? "rose" : "primary", "min-w-48 flex-1 sm:flex-none")}>
           {buttonLabel}
         </button>
       </div>
@@ -119,9 +119,9 @@ export function AddToBag({ product }: { product: Product }) {
         <div className="flex items-center gap-4">
           <div className="min-w-0 flex-1">
             <p className="truncate text-sm font-medium">{product.name}</p>
-            <p className="font-display text-xl tabular-nums">{formatPrice(variant.price * qty)}</p>
+            <p className="text-xl font-light tabular-nums">{formatPrice(variant.price * qty)}</p>
           </div>
-          <button type="button" onClick={add} className={buttonClass(justAdded ? "accent" : "primary")}>
+          <button type="button" onClick={add} className={buttonClass(justAdded ? "rose" : "primary")}>
             {buttonLabel}
           </button>
         </div>
